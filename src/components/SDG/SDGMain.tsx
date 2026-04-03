@@ -8,7 +8,6 @@ import {
 import GraphSdg from "./GraphSdg";
 import InteractiveMap from "./InteractiveMap";
 import "./SDGMain.css";
-import { color } from "chart.js/helpers";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // STATIC METADATA
