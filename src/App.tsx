@@ -1,15 +1,6 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
-import HomePage from "./pages/Home";
 //import DistrictPage from './components/districtPages/Districts'
 import { Route, Routes } from "react-router";
-import UtilityBar from "./components/UtilityBar";
-import MSride from "./pages/Initiatives/MahaSTRIDE";
-import Footer from "./components/Footer";
-import ScrollToAnchor from "./components/ScrollToAnchor";
-import DistrictPage from "./components/districtPages/Districts";
-import AAPDash from "./components/AAP/AAPEntry";
-import AAPDashboard from "./components/AAP/AAPDash";
 import SDGMain from "./components/SDG/SDGMain";
 
 function App() {
