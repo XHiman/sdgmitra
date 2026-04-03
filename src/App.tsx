@@ -8,23 +8,11 @@ function App() {
     <div className="AppDiv" id="ToPageTop">
       <title>MahaSDG</title>
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-      {/* <UtilityBar />
-      <Navbar />
-      <ScrollToAnchor /> */}
       <section className="AppBody">
         <Routes>
-          {/* <Route index element={<HomePage />} />
-          <Route
-            path="/Annual-Action-Plan"
-            element={<AAPDash district="Nashik" />}
-          />
-          <Route path="/AAP-Dashboard" element={<AAPDashboard />} />
-          <Route path="/mahastride" element={<MSride />} />
-          <Route path="/districts" element={<DistrictPage />} /> */}
           <Route index element={<SDGMain />} />
         </Routes>
       </section>
-      {/* <Footer /> */}
     </div>
   );
 }

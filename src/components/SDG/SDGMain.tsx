@@ -8,6 +8,7 @@ import {
 import GraphSdg from "./GraphSdg";
 import InteractiveMap from "./InteractiveMap";
 import "./SDGMain.css";
+import { color } from "chart.js/helpers";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // STATIC METADATA
@@ -605,10 +606,19 @@ const SDGMain: FC = () => {
   return (
     <main className="sdg-main">
       <header className="sdg-main-header">
-        <h1 className="sdg-main-title">Sustainable Development Goals</h1>
-        <p className="sdg-main-sub">
-          UN 2030 Agenda · 17 Goals · Global Indicators
-        </p>
+        <img
+          src="/MITRALogo.svg"
+          alt="MITRA Logo"
+          className="mitra-logo"/>
+        <div className="header-text">
+          <h1 className="sdg-main-title">Sustainable Development Goals</h1>
+          <p className="sdg-main-sub">
+            UN 2030 Agenda · 17 Goals · Global Indicators
+          </p>
+        </div>
+        <img src="/Seal_of_Maharashtra.svg"
+          alt="Seal of Maharashtra"
+          className="maha-logo" />
       </header>
       <div className="sdg-content">
         <div className="sdgcards">
@@ -640,6 +650,28 @@ const SDGMain: FC = () => {
           />
         </div>
       </div>
+
+      {/* Footer with MITRA branding */}
+      <footer className="sdg-page-footer">
+        <div className="sdg-footer-content">
+          <p className="sdg-footer-title">
+            Developed by <strong>MITRA</strong>
+          </p>
+          <p className="sdg-footer-description">
+            A data-driven dashboard for monitoring Sustainable Development Goals
+            across Maharashtra
+          </p>
+        </div>
+        <div className="sdg-footer-divider" />
+        <div className="sdg-footer-links">
+          {/* <p className="sdg-footer-label">In partnership with</p> */}
+          <p className="sdg-footer-partners" style={{ color: "#999999" }}>
+            Project Lead - <strong>Viraj Loliyana</strong> <br/>
+            Developer - <strong>Himanshu Chaudhari</strong>
+          </p>
+          
+        </div>
+      </footer>
     </main>
   );
 };
