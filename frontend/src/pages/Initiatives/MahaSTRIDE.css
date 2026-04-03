@@ -1,0 +1,438 @@
+/* ============================= */
+/* MAIN LAYOUT */
+/* ============================= */
+
+.MStride {
+  display: grid;
+  grid-template-columns: auto 1fr; /* Sidebar + Content */
+  gap: 24px;
+  margin-top: 24px;
+  padding-bottom: 5%;
+  background: var(--bg-page);
+}
+
+.Content {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.PageContent p {
+  text-align: justify;
+}
+
+section{
+  padding-bottom: 20px;
+  border-bottom: #cdcdcd 1px solid;
+}
+/* ============================= */
+/* TITLE BANNER */
+/* ============================= */
+
+.Title-banner {
+  grid-column: 1 / span 2;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+/* Background crossfade */
+.Banner-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out, transform 8s ease-out;
+  transform: scale(1);
+}
+
+.Banner-bg.active {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* Banner Label */
+.Rect-bg {
+  width: 360px;
+  height: 90px;
+  background-color: var(--primary);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 70%;
+  transform: translateY(-50%);
+
+  border-radius: 0 var(--radius) var(--radius) 0;
+  z-index: 2;
+}
+
+
+/* ============================= */
+/* SIDEBAR */
+/* ============================= */
+
+.SideBar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+  height: fit-content;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Section Headers */
+.Links-Header h3,
+.Download-Header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  padding-left: 10px;
+  border-left: 4px solid var(--primary);
+}
+
+
+/* ============================= */
+/* RELATED LINKS */
+/* ============================= */
+
+.Links-List {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Links-List li a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 12px;
+  border-radius: var(--radius-sm);
+
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--text-main);
+  background: var(--bg-soft);
+
+  transition: all 0.2s ease;
+}
+
+.Links-List li a:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  transform: translateX(3px);
+}
+
+.link-icon {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.link-arrow {
+  margin-left: auto;
+  font-size: 14px;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.Links-List li a:hover .link-arrow {
+  transform: translateX(4px);
+}
+
+
+/* ============================= */
+/* DOWNLOAD SECTION */
+/* ============================= */
+
+.Download-Section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#DLI-Section {
+  margin-top: 32px;
+}
+
+.DLI-Tabs-Row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.DLI-tab {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.DLI-tab:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.DLI-tab.active {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
+/* Table Container */
+.Period-Table {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  overflow-x: auto;
+}
+
+/* Table */
+.Period-Table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.Period-Table thead {
+  background: var(--bg-soft);
+}
+
+.Period-Table th,
+.Period-Table td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.Period-Table th {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.Period-Table tr:hover {
+  background: var(--bg-soft);
+}
+/* Completed - Green Tint */
+.row-completed {
+  background-color: rgba(34, 197, 94, 0.08);
+}
+
+.row-completed:hover {
+  background-color: rgba(34, 197, 94, 0.15);
+}
+
+/* Off-Track - Red Tint */
+.row-offtrack {
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+.row-offtrack:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+.Download-Item{
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.Download-tab {
+  width: 100%;
+  text-align: left;
+  background: var(--bg-soft);
+  border: none;
+
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+
+  transition: all 0.2s ease;
+}
+
+.Download-tab{
+  cursor: pointer;
+}
+
+.Download-tab:hover{
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.Download-tab.active{
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.Download-GR {
+  padding: 12px 14px;
+}
+
+/* Table */
+.Download-GR table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.Download-GR thead {
+  background: var(--bg-soft);
+}
+
+.Download-GR th {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.Download-GR th,
+.Download-GR td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.Download-GR a {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.Download-GR a:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================= */
+/* STAT STRIP */
+/* ============================= */
+
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 24px 0 32px;
+}
+
+.stat-card {
+  padding: 18px;
+  text-align: center;
+
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.stat-card span {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--primary);
+}
+
+.stat-card label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 6px;
+}
+
+
+/* ============================= */
+/* BREADCRUMB */
+/* ============================= */
+
+nav#Breadcrumb {
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+}
+
+nav#Breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+nav#Breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================= */
+/* IMAGE COLLAGE */
+/* ============================= */
+
+.img_collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.Content-Image {
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.Content-Image:hover {
+  transform: scale(1.02);
+}
+
+
+/* ============================= */
+/* IMAGE OVERLAY */
+/* ============================= */
+
+.Image-Overlay {
+  position: fixed;
+  inset: 0;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  z-index: 9999;
+}
+
+
+/* ============================= */
+/* COORDINATION LOGOS */
+/* ============================= */
+
+.Coordination-Logos ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.Coordination-Logos img {
+  height: 55px;
+  object-fit: contain;
+}
