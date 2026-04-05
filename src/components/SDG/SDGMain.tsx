@@ -606,7 +606,7 @@ const SDGMain: FC = () => {
     <main className="sdg-main">
       <header className="sdg-main-header">
         <img
-          src="/MITRALogo.svg"
+          src="/MITRA_Logo.svg"
           alt="MITRA Logo"
           className="mitra-logo"/>
         <div className="header-text">
