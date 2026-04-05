@@ -666,7 +666,8 @@ const SDGMain: FC = () => {
           {/* <p className="sdg-footer-label">In partnership with</p> */}
           <p className="sdg-footer-partners" style={{ color: "#999999" }}>
             Project Lead - <strong>Viraj Loliyana</strong> <br/>
-            Developer - <strong>Himanshu Chaudhari</strong>
+            Developer - <strong>Himanshu Chaudhari</strong> <br/>
+            Analyst - <strong>Saanchi Shah</strong>
           </p>
           
         </div>

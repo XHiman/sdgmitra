@@ -42,7 +42,7 @@ const DEFAULT_STYLE = {
 
 const MAP_CONFIG = {
   center: [19.7515, 75.7139] as [number, number],
-  zoom: 11,
+  zoom: 15,
   dragging: true,
   zoomControl: true,
   scrollWheelZoom: false,
@@ -57,6 +57,7 @@ const InteractiveMap = memo(
     const mapContainerRef = useRef<HTMLDivElement>(null);
     const mapRef = useRef<any>(null);
     const geoJsonLayerRef = useRef<any>(null);
+    const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
     // Memoize style function to avoid recreating on each render
     const getFeatureStyle = useCallback((feature: GeoJsonFeature) => {
@@ -131,15 +132,40 @@ const InteractiveMap = memo(
       [onLocationClick, selectedLocation],
     );
 
+    // Initialize map and set up ResizeObserver
     useEffect(() => {
       if (!mapContainerRef.current) return;
 
-      // Initialize map once
-      if (!mapRef.current) {
-        mapRef.current = L.map(mapContainerRef.current, MAP_CONFIG);
-      }
+      // Create a new map instance
+      const newMap = L.map(mapContainerRef.current, MAP_CONFIG);
+      mapRef.current = newMap;
 
-      // Load GeoJSON
+      // Set up ResizeObserver to handle size changes
+      const resizeObserver = new ResizeObserver(() => {
+        if (mapRef.current) {
+          setTimeout(() => {
+            mapRef.current?.invalidateSize();
+          }, 0);
+        }
+      });
+
+      resizeObserver.observe(mapContainerRef.current);
+      resizeObserverRef.current = resizeObserver;
+
+      // Cleanup function
+      return () => {
+        resizeObserver.disconnect();
+        if (mapRef.current) {
+          mapRef.current.remove();
+          mapRef.current = null;
+        }
+      };
+    }, []);
+
+    // Load GeoJSON data
+    useEffect(() => {
+      if (!mapRef.current || !mapContainerRef.current) return;
+
       const loadGeoJson = async () => {
         try {
           const response = await fetch("/MAHARASHTRA_SUBDISTRICTS.geojson");
@@ -169,6 +195,14 @@ const InteractiveMap = memo(
               padding: [50, 50],
             });
           }
+
+          // Invalidate size multiple times to ensure proper rendering
+          setTimeout(() => {
+            mapRef.current?.invalidateSize();
+          }, 0);
+          setTimeout(() => {
+            mapRef.current?.invalidateSize();
+          }, 200);
         } catch (error) {
           console.error("Error loading GeoJSON:", error);
         }

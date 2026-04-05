@@ -10,11 +10,31 @@
 }
 
 .leaflet-control-zoom {
-  display: none; /* Hide zoom control */
+  display: flex !important;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.leaflet-control-zoom a {
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 18px;
+  background: white;
+  color: #333;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #f0f0f0;
 }
 
 .leaflet-control {
-  display: none; /* Hide all controls */
+  display: none; /* Hide other controls */
 }
 
 .leaflet-popup-content-wrapper {
