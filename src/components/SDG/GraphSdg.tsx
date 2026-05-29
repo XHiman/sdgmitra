@@ -139,9 +139,8 @@ interface ChartSvgProps {
   expanded?: boolean;
 }
 
-const ChartSvg = memo(
-  (props: ChartSvgProps) => {
-    const { series, unit, theme, animated, expanded = false } = props;
+const ChartSvg = memo((props: ChartSvgProps) => {
+  const { series, unit, theme, animated, expanded = false } = props;
   const sorted = [...series].sort((a, b) => a.year - b.year);
   if (sorted.length === 0) return null;
 
@@ -465,10 +464,10 @@ const ChartSvg = memo(
         x={-100}
         y={0}
         fontSize={expanded ? 10 : 8}
-            fill={theme.actual}
-            fontFamily="'DM Mono', monospace"
-            fontWeight="600"
-            opacity="0.8"
+        fill={theme.actual}
+        fontFamily="'DM Mono', monospace"
+        fontWeight="600"
+        opacity="0.8"
         textAnchor="middle"
         transform={`rotate(-90, ${PAD.top}, 20)`}
         letterSpacing="-0.3"
@@ -477,8 +476,7 @@ const ChartSvg = memo(
       </text>
     </svg>
   );
-  },
-) as FC<ChartSvgProps>;
+}) as FC<ChartSvgProps>;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SPARSE DATA CARD  (≤ 2 distinct years → show as stat card, not graph)
@@ -496,14 +494,20 @@ interface SparseCardProps {
 const SparseDataCard = memo((props: SparseCardProps) => {
   const { sdgId, metricName, series, unit, indicatorCode, source } = props;
   const theme = useMemo(() => getTheme(sdgId), [sdgId]);
-  const sorted = useMemo(() => [...series].sort((a, b) => a.year - b.year), [series]);
+  const sorted = useMemo(
+    () => [...series].sort((a, b) => a.year - b.year),
+    [series],
+  );
   const latest = useMemo(() => sorted[sorted.length - 1], [sorted]);
   const earliest = useMemo(() => sorted[0], [sorted]);
   const hasDelta = useMemo(
     () => sorted.length >= 2 && latest && earliest && latest !== earliest,
     [sorted, latest, earliest],
   );
-  const delta = useMemo(() => (hasDelta ? latest!.value - earliest!.value : null), [hasDelta, latest, earliest]);
+  const delta = useMemo(
+    () => (hasDelta ? latest!.value - earliest!.value : null),
+    [hasDelta, latest, earliest],
+  );
   const deltaPositive = useMemo(() => delta !== null && delta >= 0, [delta]);
 
   return (
@@ -589,71 +593,69 @@ const SparseDataCard = memo((props: SparseCardProps) => {
 // LEGEND
 // ─────────────────────────────────────────────────────────────────────────────
 
-const Legend = memo((props: {
-  theme: SDGTheme;
-  hasProjected: boolean;
-  expanded?: boolean;
-}) => {
-  const { theme, hasProjected, expanded } = props;
-  return (
-  <div className={`gsdg-legend${expanded ? " gsdg-legend--expanded" : ""}`}>
-    <span className="gsdg-legend-item">
-      <svg width="24" height="10">
-        <line
-          x1="0"
-          y1="5"
-          x2="24"
-          y2="5"
-          stroke={theme.actual}
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
-        <circle
-          cx="12"
-          cy="5"
-          r="3"
-          fill="white"
-          stroke={theme.actual}
-          strokeWidth="2"
-        />
-      </svg>
-      Actual
-    </span>
-    {hasProjected && (
-      <span className="gsdg-legend-item">
-        <svg width="24" height="10">
-          <line
-            x1="0"
-            y1="5"
-            x2="24"
-            y2="5"
-            stroke={theme.projected}
-            strokeWidth="2"
-            strokeDasharray="6 3"
-          />
-        </svg>
-        Projected
-      </span>
-    )}
-    {expanded && (
-      <span className="gsdg-legend-item gsdg-legend-item--muted">
-        <svg width="10" height="10">
-          <circle
-            cx="5"
-            cy="5"
-            r="4"
-            fill="none"
-            stroke="#aaa"
-            strokeWidth="1.5"
-            strokeDasharray="3 2"
-          />
-        </svg>
-        ◌ Projected year
-      </span>
-    )}
-  </div>
-  );
-});
+const Legend = memo(
+  (props: { theme: SDGTheme; hasProjected: boolean; expanded?: boolean }) => {
+    const { theme, hasProjected, expanded } = props;
+    return (
+      <div className={`gsdg-legend${expanded ? " gsdg-legend--expanded" : ""}`}>
+        <span className="gsdg-legend-item">
+          <svg width="24" height="10">
+            <line
+              x1="0"
+              y1="5"
+              x2="24"
+              y2="5"
+              stroke={theme.actual}
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+            <circle
+              cx="12"
+              cy="5"
+              r="3"
+              fill="white"
+              stroke={theme.actual}
+              strokeWidth="2"
+            />
+          </svg>
+          Actual
+        </span>
+        {hasProjected && (
+          <span className="gsdg-legend-item">
+            <svg width="24" height="10">
+              <line
+                x1="0"
+                y1="5"
+                x2="24"
+                y2="5"
+                stroke={theme.projected}
+                strokeWidth="2"
+                strokeDasharray="6 3"
+              />
+            </svg>
+            Projected
+          </span>
+        )}
+        {expanded && (
+          <span className="gsdg-legend-item gsdg-legend-item--muted">
+            <svg width="10" height="10">
+              <circle
+                cx="5"
+                cy="5"
+                r="4"
+                fill="none"
+                stroke="#aaa"
+                strokeWidth="1.5"
+                strokeDasharray="3 2"
+              />
+            </svg>
+            ◌ Projected year
+          </span>
+        )}
+      </div>
+    );
+  },
+);
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SINGLE INDICATOR CARD  (rich graph version — > 2 years of data)
@@ -670,15 +672,24 @@ const IndicatorCard = memo((props: GraphSdgProps) => {
   const series: SeriesPoint[] = useMemo(() => {
     return dataPoints
       .filter((p) => p.metricName === metricName)
-      .map((p) => ({ year: p.year, value: p.value, isProjected: p.isProjected }))
+      .map((p) => ({
+        year: p.year,
+        value: p.value,
+        isProjected: p.isProjected,
+      }))
       .sort((a, b) => a.year - b.year);
   }, [dataPoints, metricName]);
 
   // ── Sparse path: ≤ 2 distinct years ─────────────────────────────────────
-  const distinctYears = useMemo(() => new Set(series.map((p) => p.year)).size, [series]);
+  const distinctYears = useMemo(
+    () => new Set(series.map((p) => p.year)).size,
+    [series],
+  );
 
   const hasProjected = series.some((p) => p.isProjected);
-  const latestPt = [...series].sort((a, b) => b.year - a.year)[0];
+  const latestPt = [...series]
+    .filter((p) => !p.isProjected)
+    .sort((a, b) => b.year - a.year)[0];
 
   useEffect(() => {
     const el = cardRef.current;
@@ -753,16 +764,28 @@ const IndicatorCard = memo((props: GraphSdgProps) => {
         <div className="gsdg-card-header">
           <div className="gsdg-card-title-group">
             <p className="gsdg-card-title">{metricName}</p>
-            {latestPt && (
-              <span
-                className="gsdg-card-latest"
-                style={{ color: theme.actual }}
-              >
-                {fmtVal(latestPt.value)}
-                {unit === "%" ? "%" : ""}{" "}
-                <span className="gsdg-card-latest-yr">({latestPt.year})</span>
-              </span>
-            )}
+            <div className="gsdg-card-value-group">
+              {latestPt && (
+                <span
+                  className="gsdg-card-latest"
+                  style={{ color: theme.actual }}
+                >
+                  {fmtVal(latestPt.value)}
+                  {unit === "%" ? "%" : ""}{" "}
+                  <span className="gsdg-card-latest-yr">({latestPt.year})</span>
+                </span>
+              )}
+              {latestPt &&
+                latestPt.value >= 100 &&
+                (unit === "%" || unit === "Percent") && (
+                  <span
+                    className="gsdg-badge-achieved"
+                    style={{ backgroundColor: theme.actual }}
+                  >
+                    ✓ Achieved
+                  </span>
+                )}
+            </div>
           </div>
           <div className="gsdg-card-actions">
             <button

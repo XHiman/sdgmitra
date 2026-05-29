@@ -166,6 +166,51 @@
   flex: 1;
 }
 
+.gsdg-card-value-group {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.gsdg-card-latest {
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.gsdg-card-latest-yr {
+  font-size: 9px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.gsdg-badge-achieved {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.02em;
+  animation: gsdg-badge-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes gsdg-badge-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .gsdg-card-actions {
   display: flex;
   gap: 4px;
